@@ -30,6 +30,10 @@
   background-image: url("./assets/location_pin.svg");
 }
 
+.update-marker::after {
+  background-image: url("./assets/location.svg");
+}
+
 .api_key_input {
   padding: 1% 3%;
 }

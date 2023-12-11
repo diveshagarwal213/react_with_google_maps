@@ -66,6 +66,7 @@ function Map() {
   const libraries: Libraries = useMemo(() => ["places"], []);
 
   const [json_data, set_json_data] = useState({});
+  const [markerSwitch, set_markerSwitch] = useState<boolean>(false); //"update-marker"
 
   //STATES
   //--Google Maps
@@ -210,7 +211,11 @@ function Map() {
 
   return (
     <div className="Map-component ">
-      <div className="Map-component-map-view custom-center-marker">
+      <div
+        className={`Map-component-map-view custom-center-marker ${
+          markerSwitch && "update-marker"
+        } `}
+      >
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
@@ -280,6 +285,14 @@ function Map() {
           </div>
           <Button type="button" onClick={onSubmit} variant="contained">
             Update json
+          </Button>
+          &nbsp; &nbsp;
+          <Button
+            type="button"
+            onClick={() => set_markerSwitch((v) => !v)}
+            variant="outlined"
+          >
+            Update Maker
           </Button>
         </div>
         <div>
