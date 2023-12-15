@@ -205,6 +205,32 @@ function Map() {
     }
   };
 
+  React.useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setCenter({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      });
+    } else {
+      console.log("Geolocation is not available in your browser.");
+    }
+  }, []);
+
+  function locate_me() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setCenter({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      });
+    } else {
+      console.log("Geolocation is not available in your browser.");
+    }
+  }
+
   //UI
 
   if (!isLoaded) return <div>...Loading</div>;
@@ -227,7 +253,7 @@ function Map() {
             fullscreenControl: false,
             streetViewControl: false,
             disableDefaultUI: true,
-            zoomControl: false,
+            zoomControl: true,
             keyboardShortcuts: false,
           }}
           onDragEnd={onDragEnd}
@@ -293,6 +319,10 @@ function Map() {
             variant="outlined"
           >
             Update Maker
+          </Button>
+          &nbsp; &nbsp;
+          <Button type="button" onClick={locate_me} variant="outlined">
+            Locate Me
           </Button>
         </div>
         <div>
